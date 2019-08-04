@@ -1,0 +1,61 @@
+---
+title: "Cars In R"
+author: "lee-coates"
+date: "8/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown and Knit
+
+Like with Jupyter Notebooks for Python, R Notebooks provide R Coders with a Lab Notes style IDE. Using the MarkDown Converter, we can write both plain text and code while also producing rich visualizations all on the same page. A big difference between Jupyter Notebooks and R Notebooks is how the Markdown Converter works. While Jupyter leverages IPython, R Notebooks leverage a tool called Knit--which can be found in the RMarkdown Menu Bar.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. R code chunks are embedded using Markdown's code-block syntax plus an r-block identifier, as shown below.
+
+## Cars Data Set in R
+In Python, sample datasets can be found in sklearn, seaborn, and pandas. In R, we look to a base library called *datasets*. For example, this exercise leverages the built in *cars* dataset, which compares car speeds with corresponding stopping distances:
+```{r cars}
+summary(cars)
+```
+
+## Data Profiles in R
+R comes well equipped to profile data. Inspect the structure and range of the cars dataset using the str() and range() functions:
+```{r cars-structure-and-range}
+
+```
+
+Additionally, define the Quartiles and calculate the Interquartile Range of each column in the cars dataset using the quantile() and IQR() functions:
+```{r cars-quartiles}
+
+```
+
+
+Now use seq() in conjunction with the quantile() function to find the deciles:
+```{r cars-deciles}
+
+```
+
+Now bring it all together with the boxplot() function. Don't forget a Title and Labels:
+```{r cars-boxplot}
+
+```
+
+## More Granular Profiling
+To get a better understanding of distribution of the cars dataset, use the histogram() function with bins ranging from 5 to 20:
+```{r cars-histogram}
+
+```
+
+To quickly examine the relationship between the two features in the car dataset, use the plot() function:
+```{r cars-scatterplot}
+
+```
+
+## Extra Credit
+Base R provides great tools for any data analyst, but the open source community has expanded the flexibility and richness of the language in packages like ggplot2. In this final section, recreate both the histogram and scatterplot from the previous section using ggplot2:
+```{r cars-ggplot2}
+
+```
