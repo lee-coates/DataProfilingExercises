@@ -21,25 +21,34 @@ In Python, sample datasets can be found in sklearn, seaborn, and pandas. In R, w
 summary(cars)
 ```
 
-## Data Profiles in R
+## Data Profiles in R 
 R comes well equipped to profile data. Inspect the structure and range of the cars dataset using the str() and range() functions:
 ```{r cars-structure-and-range}
+  str(cars)
+  range(cars)
+  
 
 ```
 
 Additionally, define the Quartiles and calculate the Interquartile Range of each column in the cars dataset using the quantile() and IQR() functions:
 ```{r cars-quartiles}
-
+quantile(cars$speed)
+quantile(cars$dist)
+IQR(cars$speed)
+IQR(cars$dist)
 ```
 
 
 Now use seq() in conjunction with the quantile() function to find the deciles:
 ```{r cars-deciles}
+quantile(dist, prob = seq(0, 1, length = 11), type = 5)
+
 
 ```
 
 Now bring it all together with the boxplot() function. Don't forget a Title and Labels:
 ```{r cars-boxplot}
+boxplot(dist ~ speed, data = cars, xlab = "Distance", ylab = "Speed", main = "Cars Data")
 
 ```
 
