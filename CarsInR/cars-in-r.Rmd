@@ -21,41 +21,68 @@ In Python, sample datasets can be found in sklearn, seaborn, and pandas. In R, w
 summary(cars)
 ```
 
-## Data Profiles in R
+## Data Profiles in R 
 R comes well equipped to profile data. Inspect the structure and range of the cars dataset using the str() and range() functions:
 ```{r cars-structure-and-range}
+  str(cars)
+  range(cars)
+  
 
 ```
 
 Additionally, define the Quartiles and calculate the Interquartile Range of each column in the cars dataset using the quantile() and IQR() functions:
 ```{r cars-quartiles}
-
+quantile(cars$speed)
+quantile(cars$dist)
+IQR(cars$speed)
+IQR(cars$dist)
 ```
 
 
 Now use seq() in conjunction with the quantile() function to find the deciles:
 ```{r cars-deciles}
+quantile(cars$dist, prob = seq(0, 1, length = 11), type = 5)
+quantile(cars$speed, prob = seq(0,1, length = 11), type = 5)
 
 ```
 
 Now bring it all together with the boxplot() function. Don't forget a Title and Labels:
 ```{r cars-boxplot}
+boxplot(dist ~ speed, data = cars, xlab = "Distance (ft)", ylab = "Speed (Mph)", main = "Cars Data", col = "green", border = "black", horizontal = TRUE, notch = FALSE)
+boxplot(cars$speed, main = "Cars Speed Data", xlab = "Speed (MPH)",col = "blue",border = "red",horizontal = TRUE,notch = TRUE)
+boxplot(cars$dist, main = "Cars Distance Data", xlab = "dist (ft)",col = "yellow",border = "brown",horizontal = TRUE,notch = TRUE)
 
 ```
 
 ## More Granular Profiling
 To get a better understanding of distribution of the cars dataset, use the histogram() function with bins ranging from 5 to 20:
 ```{r cars-histogram}
-
+hist(cars$speed, breaks= 5,
+       freq=FALSE,col="orange",main="Histogram For Cars Speed Data",
+       xlab="Speed",ylab="f(x)")
 ```
 
 To quickly examine the relationship between the two features in the car dataset, use the plot() function:
 ```{r cars-scatterplot}
+plot(cars, xlab = "Speed (mph)", ylab = "Distance (ft)",las = 1, col = "blue",main="Scatter Plot For Cars Speed Data")
+# Scatter Plot with linear regression 
+scatter.smooth(cars, xlab = "Speed (mph)", ylab = "Distance (ft)",main="Scatter Plot with Linear Regression For Cars Speed Data", col = "red")
 
 ```
 
 ## Extra Credit
 Base R provides great tools for any data analyst, but the open source community has expanded the flexibility and richness of the language in packages like ggplot2. In this final section, recreate both the histogram and scatterplot from the previous section using ggplot2:
 ```{r cars-ggplot2}
+
+library(ggplot2)
+
+ggplot(cars, aes(x=speed , y=dist)) +
+    geom_point(shape=1) +
+    ggtitle("Scatter Plot Using GGplot2")
+   
+ggplot(cars, aes(x = speed, y = dist)) + 
+  geom_point() +
+  stat_smooth(method = "lm", col = "red") +
+      ggtitle("Scatter Plot Using GGplot2 With Linear Reg.")
 
 ```
